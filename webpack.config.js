@@ -13,7 +13,7 @@ module.exports = {
   devtool: isDev && 'eval',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   module: {
     rules: [
@@ -37,9 +37,10 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
+      inject: false,
     }),
     isDev && new webpack.HotModuleReplacementPlugin(),
     isDev && new ReactRefreshWebpackPlugin(),
   ].filter(Boolean),
-  optimization: !isDev ? {} : undefined
+  optimization: !isDev ? {} : undefined,
 }
