@@ -1,9 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+import { getSystemTheme } from '../utils'
+
+
 export const appSlice = createSlice({
   name: 'app',
   initialState: {
-    theme: 'light',
+    theme: getSystemTheme(),
     units: 'celsius',
   },
   reducers: {

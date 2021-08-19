@@ -10,7 +10,7 @@ export function SiteHeader() {
     <Grid style={{ padding: '1em' }} stackable>
       <Grid.Row >
         <Grid.Column width={5}>
-          <Header><Image src='./logo.png' />React Weather</Header>
+          <Header><Image src='./logo.png' style={{ background: '#FFF', borderRadius: '5px', padding: '.2em' }} />React Weather</Header>
         </Grid.Column>
         <Grid.Column textAlign='center' width={6}>
           <Input fluid placeholder='Enter city name...' icon='search' />

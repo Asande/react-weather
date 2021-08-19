@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 
 import { CityCardContentPlaceholder } from './CityCardContentPlaceholder'
 import { formatTemperature, getWeatherIconByName } from '../utils'
+import { getCityByName } from '../store/favourites'
 
 
 const EXAMPLE_DATA = {
@@ -50,40 +51,46 @@ const EXAMPLE_DATA = {
   'cod': 200,
 }
 
-
-
-export function CityCard({ loading, name }) {
-  const mainWeather = EXAMPLE_DATA.weather[0].main
+export function CityCard({ name }) {
   const units = useSelector(state => state.app.units)
-  const formattedTemp = formatTemperature(EXAMPLE_DATA.main.temp, units)
+  const cityData = useSelector(getCityByName(name))
+  const { loading, weather } = cityData
+  if (loading) {
+    return (
+      <Card>
+        <Card.Content>
+          <CityCardContentPlaceholder/>
+        </Card.Content>
+      </Card>
+    )
+  }
+  const mainWeather = weather.weather[0].main
+  const formattedTemp = !loading ? formatTemperature(weather.main.temp, units) : null
   return (
     <Card>
       <Card.Content>
-        {loading ? <CityCardContentPlaceholder/> :
-          <>
-            <div style={{ float: 'right' }}>
-              <Header>{formattedTemp}</Header>
-              <Icon style={{ float: 'right' }} size='big' name={getWeatherIconByName(mainWeather)} />
-            </div>
-            <Card.Header>{name}</Card.Header>
-            <Card.Meta>{mainWeather}</Card.Meta>
-            <Card.Description>
-              <List>
-                <List.Item>
-                  <List.Icon name='thermometer half' />
-                  <List.Content>{formattedTemp} (feels like {formattedTemp})</List.Content>
-                </List.Item>
-                <List.Item>
-                  <List.Icon name='theme' />
-                  <List.Content>{EXAMPLE_DATA.main.humidity} %</List.Content>
-                </List.Item>
-                <List.Item>
-                  <List.Icon name='cloud download' />
-                  <List.Content>{EXAMPLE_DATA.main.pressure} hPa</List.Content>
-                </List.Item>
-              </List>
-            </Card.Description>
-          </>}
+        <div style={{ float: 'right' }}>
+          <Header>{formattedTemp}</Header>
+          <Icon style={{ float: 'right' }} size='big' name={getWeatherIconByName()} />
+        </div>
+        <Card.Header>{name}</Card.Header>
+        <Card.Meta>{mainWeather}</Card.Meta>
+        <Card.Description>
+          <List>
+            <List.Item>
+              <List.Icon name='thermometer half' />
+              <List.Content>{formattedTemp} (feels like {formattedTemp})</List.Content>
+            </List.Item>
+            <List.Item>
+              <List.Icon name='theme' />
+              <List.Content>{EXAMPLE_DATA.main.humidity} %</List.Content>
+            </List.Item>
+            <List.Item>
+              <List.Icon name='cloud download' />
+              <List.Content>{EXAMPLE_DATA.main.pressure} hPa</List.Content>
+            </List.Item>
+          </List>
+        </Card.Description>
       </Card.Content>
     </Card>
   )

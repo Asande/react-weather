@@ -1,0 +1,17 @@
+body {
+  background: #333;
+  color: #CCC;
+}
+.ui.header {
+  color: #CCC;
+}
+.ui.segment {
+  background: #666;
+}
+.ui.toggle label::before {
+  background: #666 !important;
+}
+.ui.input > input {
+  background: #666 !important;
+  color: #CCC !important;
+}

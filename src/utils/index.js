@@ -15,3 +15,14 @@ export function formatTemperature(value, units) {
       return `${value} K`
   }
 }
+
+export function getSystemTheme() {
+  const darkThemeMq = window.matchMedia('(prefers-color-scheme: dark)')
+  return darkThemeMq.matches ? 'dark' : 'light'
+}
+
+export const asyncGetCurrentPosition = () => {
+  return new Promise((res, rej) => {
+    navigator.geolocation.getCurrentPosition(res, rej)
+  })
+}
