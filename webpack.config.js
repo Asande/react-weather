@@ -8,6 +8,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 
 const isDev = process.env.NODE_ENV === 'development'
+const openWeatherApiKey = process.env.OPEN_WEATHER_API_KEY
 
 module.exports = {
   mode: process.env.NODE_ENV,
@@ -50,6 +51,10 @@ module.exports = {
       inject: false,
     }),
     new MiniCssExtractPlugin(),
+    new webpack.DefinePlugin({
+      OPEN_WEATHER_API_KEY: JSON.stringify(openWeatherApiKey),
+      ENV: JSON.stringify(process.env.NODE_ENV),
+    }),
     new CopyWebpackPlugin({
       patterns: [
         { from: './public', to: './' },

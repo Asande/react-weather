@@ -1,0 +1,16 @@
+.rw-toggle-left-right {
+  display: inline-flex;
+  flex-direction: row;
+}
+
+.rw-toggle-left-right_left-item {
+  text-align: right;
+}
+
+.rw-toggle-left-right_toggle {
+  padding: 0 .3em;
+}
+
+.rw-toggle-left-right_right-item {
+  text-align: left;
+}

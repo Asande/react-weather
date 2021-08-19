@@ -1,8 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Card, Header, Icon } from 'semantic-ui-react'
+import { Card, List, Icon, Header } from 'semantic-ui-react'
+import { useSelector } from 'react-redux'
 
-import { CityCardPlaceholder } from './CityCardPlaceholder'
+import { CityCardContentPlaceholder } from './CityCardContentPlaceholder'
+import { formatTemperature, getWeatherIconByName } from '../utils'
 
 
 const EXAMPLE_DATA = {
@@ -48,31 +50,48 @@ const EXAMPLE_DATA = {
   'cod': 200,
 }
 
-function getWeatherIconByName(name) {
-  switch (name.toLowerCase()) {
-    case 'clear': return 'sun'
-    default: return 'question mark'
-  }
-}
 
-export const CityCard = ({ loading, name }) =>
-  <Card style={{ margin: '3em' }}>
-    <Card.Content>
-      {loading ? <CityCardPlaceholder/> :
-        <>
-          <Icon name={getWeatherIconByName(name)} />
-          <Card.Header>{EXAMPLE_DATA.weather[0].main}</Card.Header>
-          <Card.Meta>{EXAMPLE_DATA.weather[0].main}</Card.Meta>
-          <Card.Description>
-            <Header>Speed: {EXAMPLE_DATA.wind.speed}</Header>
-          </Card.Description>
-        </>}
-    </Card.Content>
-  </Card>
+
+export function CityCard({ loading, name }) {
+  const mainWeather = EXAMPLE_DATA.weather[0].main
+  const units = useSelector(state => state.app.units)
+  const formattedTemp = formatTemperature(EXAMPLE_DATA.main.temp, units)
+  return (
+    <Card>
+      <Card.Content>
+        {loading ? <CityCardContentPlaceholder/> :
+          <>
+            <div style={{ float: 'right' }}>
+              <Header>{formattedTemp}</Header>
+              <Icon style={{ float: 'right' }} size='big' name={getWeatherIconByName(mainWeather)} />
+            </div>
+            <Card.Header>{name}</Card.Header>
+            <Card.Meta>{mainWeather}</Card.Meta>
+            <Card.Description>
+              <List>
+                <List.Item>
+                  <List.Icon name='thermometer half' />
+                  <List.Content>{formattedTemp} (feels like {formattedTemp})</List.Content>
+                </List.Item>
+                <List.Item>
+                  <List.Icon name='theme' />
+                  <List.Content>{EXAMPLE_DATA.main.humidity} %</List.Content>
+                </List.Item>
+                <List.Item>
+                  <List.Icon name='cloud download' />
+                  <List.Content>{EXAMPLE_DATA.main.pressure} hPa</List.Content>
+                </List.Item>
+              </List>
+            </Card.Description>
+          </>}
+      </Card.Content>
+    </Card>
+  )
+}
 
 CityCard.propTypes = {
   name: PropTypes.string.isRequired,
-  loading: PropTypes.boolean,
+  loading: PropTypes.bool,
 }
 
 export default CityCard

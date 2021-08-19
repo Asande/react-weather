@@ -4,6 +4,10 @@
     "plugin:react/recommended"
   ],
   "plugins": ["jest"],
+  "globals": {
+    "ENV": true,
+    "OPEN_WEATHER_API_KEY": true
+  },
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module"
