@@ -18,6 +18,11 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: '[contenthash].[name].js',
   },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
+  },
   module: {
     rules: [
       {

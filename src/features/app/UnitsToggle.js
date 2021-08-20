@@ -1,8 +1,9 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { changeUnits } from '../store/app'
-import ToggleLeftRight from './ToggleLeftRight'
+import ToggleLeftRight from '@/components/ToggleLeftRight'
+import { TEMPERATURE_UNITS } from '@/constants'
+import { changeUnits } from './slice'
 
 
 export function UnitsToggle(props) {
@@ -13,8 +14,8 @@ export function UnitsToggle(props) {
       {...props}
       value={units}
       onChange={(newUnits) => dispatch(changeUnits(newUnits))}
-      leftItem={{ label: 'C°', value: 'celsius' }}
-      rightItem={{ label: 'F°', value: 'fahrenheit' }}
+      leftItem={{ label: 'C°', value: TEMPERATURE_UNITS.CELSIUS }}
+      rightItem={{ label: 'F°', value: TEMPERATURE_UNITS.FAHRENHEIT }}
     />
   )
 }

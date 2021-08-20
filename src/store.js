@@ -2,9 +2,10 @@ import { configureStore } from '@reduxjs/toolkit'
 import reduxThunk from 'redux-thunk'
 import reduxLogger from 'redux-logger'
 
-import appReducer from './app'
-import geoReducer from './geo'
-import favouritesReducer from './favourites'
+import appReducer from './features/app/slice'
+import geoReducer from './features/geo/slice'
+import searchReducer from './features/search/slice'
+import favouritesReducer from './features/favourites/slice'
 
 
 const localStorageSync = (store) => (next) => (action) => {
@@ -16,6 +17,7 @@ const localStorageSync = (store) => (next) => (action) => {
 export const store = configureStore({
   reducer: {
     app: appReducer,
+    search: searchReducer,
     geo: geoReducer,
     favourites: favouritesReducer,
   },

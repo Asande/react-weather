@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { asyncGetCurrentPosition } from '../utils'
-import { getNearestCity } from '../utils/api'
+
+import { asyncGetCurrentPosition } from '@/utils'
+import { getNearestCity } from '@/utils/api'
 
 
 const geoSlice = createSlice({
@@ -34,7 +35,7 @@ export const initialize = () => async (dispatch) => {
     }
     try {
       const weather = await getNearestCity(pos.coords.latitude, pos.coords.longitude)
-      newState.weather = weather
+      newState.weather = weather.list[0]
     } catch (error) {
       console.error(error)
       newState.error = 'cannot find nearest city'

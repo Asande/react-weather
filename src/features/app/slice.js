@@ -1,13 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { getSystemTheme } from '../utils'
+import { getSystemTheme } from '@/utils'
+import { TEMPERATURE_UNITS } from '@/constants'
 
 
 export const appSlice = createSlice({
   name: 'app',
   initialState: {
     theme: getSystemTheme(),
-    units: 'celsius',
+    units: TEMPERATURE_UNITS.CELSIUS,
   },
   reducers: {
     changeTheme: (state, action) => {
@@ -19,6 +20,6 @@ export const appSlice = createSlice({
   },
 })
 
-export const { changeTheme, changeUnits } = appSlice.actions
+export const { changeTheme, changeUnits, changeSearch } = appSlice.actions
 
 export default appSlice.reducer

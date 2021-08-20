@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Card } from 'semantic-ui-react'
 
-import { getAllCities } from '../store/favourites'
+import { getAllCities } from './slice'
 import CityCard from './CityCard'
 
 

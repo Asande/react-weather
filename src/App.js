@@ -1,9 +1,8 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 
-import './app.css'
 import { store } from './store'
-import MainPage from './components/MainPage'
+import MainPage from './pages/main/MainPage'
 
 
 export const App = () => {

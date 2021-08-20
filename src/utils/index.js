@@ -1,3 +1,6 @@
+import { TEMPERATURE_UNITS } from '@/constants'
+
+
 export function getWeatherIconByName(name) {
   switch (name.toLowerCase()) {
     case 'clear': return 'sun'
@@ -5,11 +8,11 @@ export function getWeatherIconByName(name) {
   }
 }
 
-export function formatTemperature(value, units) {
+export function formatKelvinTemperature(value, units) {
   switch (units) {
-    case 'fahrenheit':
+    case TEMPERATURE_UNITS.FAHRENHEIT:
       return `${Math.floor(value * 9/5 - 459.67)} F°`
-    case 'celsius':
+    case TEMPERATURE_UNITS.CELSIUS:
       return `${Math.floor(value - 273.15)} C°`
     default:
       return `${value} K`

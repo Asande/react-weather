@@ -2,8 +2,8 @@ import React from 'react'
 import { Icon } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { changeTheme } from '../store/app'
-import ToggleLeftRight from './ToggleLeftRight'
+import ToggleLeftRight from '@/components/ToggleLeftRight'
+import { changeTheme } from './slice'
 
 
 export function ThemeToggle(props) {

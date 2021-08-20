@@ -3,9 +3,10 @@ import { useSelector } from 'react-redux'
 import { Container } from 'semantic-ui-react'
 import Helmet from 'react-helmet'
 
-import FavouriteCities from './FavouriteCities'
-import { SiteHeader } from './SiteHeader'
-import { GeolocationWeather } from './GeolocationWeather'
+import FavouriteCities from '@/features/favourites/FavouriteCities'
+import { GeolocationWeather } from '@/features/geo/GeolocationWeather'
+import { SearchResult } from '@/features/search/SearchResult'
+import { MainPageHeader } from './MainPageHeader'
 
 
 export function MainPage() {
@@ -15,8 +16,9 @@ export function MainPage() {
       <Helmet>
         {theme === 'dark' && <link rel='stylesheet' type='text/css' href='dark.css' />}
       </Helmet>
-      <SiteHeader/>
-      <Container className='rw-main-container'>
+      <MainPageHeader/>
+      <Container style={{ padding: '2em 0' }}>
+        <SearchResult />
         <GeolocationWeather/>
         <FavouriteCities/>
       </Container>
