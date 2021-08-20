@@ -15,8 +15,3 @@
 ## Production build
 
     yarn build
-
-## Docker
-
-    docker build . -t react-weather
-    docker run react-weather
