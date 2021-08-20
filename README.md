@@ -10,8 +10,8 @@
 
 ## Development
 
-    yarn serve
+    OPEN_WEATHER_API_KEY={key} yarn serve
 
 ## Production build
 
-    yarn build
+    OPEN_WEATHER_API_KEY={key} yarn build
