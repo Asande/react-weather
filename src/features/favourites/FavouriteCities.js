@@ -1,17 +1,23 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Card } from 'semantic-ui-react'
+import { Segment, Icon, Container } from 'semantic-ui-react'
 
-import { getAllCities } from './slice'
+import { getAllFavouritesNames } from './slice'
 import CityCard from './CityCard'
 
 
 export function FavouriteCities() {
-  const favCities = useSelector(getAllCities)
+  const favCities = useSelector(getAllFavouritesNames)
+  if (!favCities.length) {
+    return null
+  }
   return (
-    <Card.Group centered>
-      {favCities.map((city) => <CityCard key={city.id} city={city} />)}
-    </Card.Group>
+    <Segment>
+      <Icon size='large' style={{ float: 'right' }} name='star' />
+      <Container style={{ marginTop: '3em' }}>
+        {favCities.map((city) => <CityCard key={city} name={city} />)}
+      </Container>
+    </Segment>
   )
 }
 

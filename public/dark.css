@@ -1,9 +1,9 @@
 body {
   background: #333;
-  color: #CCC;
+  color: #DDD;
 }
 .ui.header {
-  color: #CCC;
+  color: #DDD;
 }
 .ui.segment {
   background: #666;
@@ -13,5 +13,12 @@ body {
 }
 .ui.input > input {
   background: #666 !important;
-  color: #CCC !important;
+  color: #DDD !important;
+}
+.ui.card {
+  background: #444 !important;
+  box-shadow: 0 1px 3px 0 #333, 0 0 0 1px #333 !important;
+}
+.ui.card * {
+  color: #DDD !important;
 }

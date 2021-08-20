@@ -8,7 +8,7 @@ import MainPage from './pages/main/MainPage'
 export const App = () => {
   return (
     <Provider store={store}>
-      <MainPage/>
+      <MainPage />
     </Provider>
   )
 }

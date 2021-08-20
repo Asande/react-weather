@@ -1,36 +1,52 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
+
+import { fetchCityWeatherByName } from '@/utils/api'
 
 
 const favouritesSlice = createSlice({
   name: 'favourites',
   initialState: {
-    cities: [],
+    favourites: [],
+    weatherData: {},
     status: 'idle',
     error: null,
   },
   reducers: {
-    addCity: (state, action) => {
-      state[action.payload.name] = { ...action.payload }
+    addToFavourites: (state, action) => {
+      state.favourites = [...new Set(state.favourites).add(action.payload)]
     },
-    removeCity: (state, name) => {
-      delete state[name]
+    removeFromFavourites: (state, action) => {
+      const name = action.payload
+      state.favourites = state.favourites.filter((fav) => fav !== name)
+      delete state.weatherData[name]
+    },
+    setCityWeatherData: (state, action) => {
+      state.weatherData[action.payload.name] = {
+        ...state.weatherData[action.payload.name],
+        ...action.payload,
+      }
     },
   },
 })
 
-export const loadCitiesData = createAsyncThunk('favourites/loadCitiesData', async (state) => {
-  const promises = state.cities.map((city) => getCityByName(city.name))
-  await Promise.all(promises)
-})
+export const { addToFavourites, removeFromFavourites, setCityWeatherData } = favouritesSlice.actions
 
-export function getAllCities(state) {
-  return state.favourites.cities
+export const refreshCity = (name) => async (dispatch) => {
+  dispatch(setCityWeatherData({ name, loading: true }))
+  try {
+    const data = await fetchCityWeatherByName(name)
+    dispatch(setCityWeatherData({ name, loading: false, weather: data }))
+  } catch {
+    dispatch(setCityWeatherData({ name, loading: false }))
+  }
 }
 
-export function getCityByName(state, name) {
-  return state.favourites.cities.find((city) => city.name === name)
+export const getAllFavouritesNames = (state) => {
+  return state.favourites.favourites
 }
 
-export const { addCity, removeCity } = favouritesSlice.actions
+export const getFavouriteCityData = (name) => (state) => {
+  return state.favourites.weatherData[name]
+}
 
 export default favouritesSlice.reducer

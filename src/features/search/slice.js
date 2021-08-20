@@ -19,7 +19,14 @@ export const searchSlice = createSlice({
     status: 'idle',
     error: null,
   },
-  reducers: {},
+  reducers: {
+    resetSearch: (state) => {
+      state.search = ''
+      state.searchResult = null
+      state.status = 'idle'
+      state.error = null
+    },
+  },
   extraReducers: {
     [handleSearch.pending]: (state) => {
       state.status = 'loading'
@@ -35,5 +42,7 @@ export const searchSlice = createSlice({
     },
   },
 })
+
+export const { resetSearch } = searchSlice.actions
 
 export default searchSlice.reducer

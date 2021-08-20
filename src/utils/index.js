@@ -1,7 +1,7 @@
 import { TEMPERATURE_UNITS } from '@/constants'
 
 
-export function getWeatherIconByName(name) {
+export function getWeatherIconByName(name = '') {
   switch (name.toLowerCase()) {
     case 'clear': return 'sun'
     default: return 'cloud'

@@ -17,7 +17,7 @@ export function MainPage() {
         {theme === 'dark' && <link rel='stylesheet' type='text/css' href='dark.css' />}
       </Helmet>
       <MainPageHeader/>
-      <Container style={{ padding: '2em 0' }}>
+      <Container text style={{ padding: '2em 0' }}>
         <SearchResult />
         <GeolocationWeather/>
         <FavouriteCities/>

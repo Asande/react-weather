@@ -15,15 +15,16 @@ export function GeolocationWeather() {
 
   useEffect(() => {
     dispatch(initialize())
-  }, [])
+  }, [permission])
+
+  if (permission === 'denied') {
+    return null
+  }
 
   return (
     <Segment>
       <Icon size='large' style={{ float: 'right' }} name='map marker alternate' />
-      {position && weather && <Header>{weather.name}</Header>}
-      <div>Permission: {permission}</div>
-      <div>Position: {position ? `lat ${position.lat} lon ${position.lon}` : '-'}</div>
-      <div>Weather: {!weather && '-'}</div>
+      {position && weather && <Header style={{ marginTop: '0' }}>{weather.name}</Header>}
       {!!weather && <WeatherDataList data={weather.main} units={units} />}
     </Segment>
   )

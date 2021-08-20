@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Input } from 'semantic-ui-react'
 
@@ -11,6 +11,10 @@ export function CitySearchInput() {
   const stateSearch = useSelector((state) => state.search.search)
   const dispatch = useDispatch()
   const [val, setVal] = useState(stateSearch)
+
+  useEffect(() => {
+    setVal(stateSearch)
+  }, [stateSearch])
 
   function handleChange(e, { value }) {
     setVal(value)
