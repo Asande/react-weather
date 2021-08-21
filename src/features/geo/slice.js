@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { asyncGetCurrentPosition } from '@/utils'
+import { asyncGetCurrentPosition, getGeoPermission } from '@/utils'
 import { getNearestCity } from '@/utils/api'
 
 
@@ -22,7 +22,7 @@ const geoSlice = createSlice({
 export const { changeState } = geoSlice.actions
 
 export const initialize = () => async (dispatch) => {
-  const result = await navigator.permissions.query({ name: 'geolocation' })
+  const result = await getGeoPermission()
   const newState = { permission: result.state, position: null, weather: null }
 
   if (['granted', 'prompt'].includes(result.state)) {

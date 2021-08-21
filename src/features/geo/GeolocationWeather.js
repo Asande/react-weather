@@ -1,8 +1,8 @@
-import { WeatherDataList } from '@/components/WeatherDataList'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Segment, Header, Icon } from 'semantic-ui-react'
 
+import { WeatherDataList } from '@/components/WeatherDataList'
 import { initialize } from './slice'
 
 
@@ -17,15 +17,15 @@ export function GeolocationWeather() {
     dispatch(initialize())
   }, [permission])
 
-  if (permission === 'denied') {
+  if (permission === 'denied' || !position || !weather) {
     return null
   }
 
   return (
     <Segment>
       <Icon size='large' style={{ float: 'right' }} name='map marker alternate' />
-      {position && weather && <Header style={{ marginTop: '0' }}>{weather.name}</Header>}
-      {!!weather && <WeatherDataList data={weather.main} units={units} />}
+      <Header style={{ marginTop: '0' }}>{weather.name}</Header>
+      <WeatherDataList data={weather.main} units={units} />
     </Segment>
   )
 }

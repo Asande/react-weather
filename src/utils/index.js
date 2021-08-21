@@ -24,8 +24,15 @@ export function getSystemTheme() {
   return darkThemeMq.matches ? 'dark' : 'light'
 }
 
-export const asyncGetCurrentPosition = () => {
+export function asyncGetCurrentPosition() {
   return new Promise((res, rej) => {
     navigator.geolocation.getCurrentPosition(res, rej)
   })
+}
+
+export async function getGeoPermission() {
+  if (navigator.permissions) {
+    return navigator.permissions.query({ name: 'geolocation' })
+  }
+  return 'prompt'
 }
