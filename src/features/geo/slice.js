@@ -22,23 +22,17 @@ const geoSlice = createSlice({
 export const { changeState } = geoSlice.actions
 
 export const initialize = () => async (dispatch) => {
-  const result = await getGeoPermission()
-  const newState = { permission: result.state, position: null, weather: null }
+  const permission = await getGeoPermission()
+  const newState = { permission, position: null, weather: null }
 
-  if (['granted', 'prompt'].includes(result.state)) {
-    let pos
+  if (['granted', 'prompt'].includes(permission)) {
     try {
-      pos = await asyncGetCurrentPosition()
+      const pos = await asyncGetCurrentPosition()
       newState.position = { lat: pos.coords.latitude, lon: pos.coords.longitude }
-    } catch (error) {
-      newState.error = 'cannot get geolocation'
-    }
-    try {
       const weather = await getNearestCity(pos.coords.latitude, pos.coords.longitude)
       newState.weather = weather.list[0]
     } catch (error) {
-      console.error(error)
-      newState.error = 'cannot find nearest city'
+      newState.error = 'cannot get geolocation'
     }
   }
   dispatch(changeState(newState))

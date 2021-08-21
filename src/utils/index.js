@@ -32,7 +32,8 @@ export function asyncGetCurrentPosition() {
 
 export async function getGeoPermission() {
   if (navigator.permissions) {
-    return navigator.permissions.query({ name: 'geolocation' })
+    const result = await navigator.permissions.query({ name: 'geolocation' })
+    return result.state
   }
   return 'prompt'
 }
