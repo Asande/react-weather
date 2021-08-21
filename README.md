@@ -4,7 +4,7 @@
 
 - React
 - Redux
-- SemanticUI React
+- Semantic-UI React
 - Webpack
 - Babel
 
@@ -15,3 +15,12 @@
 ## Production build
 
     OPEN_WEATHER_API_KEY={key} yarn build
+
+## Time spent (~8 hours)
+
+- new project setup: dependencies, webpack, eslint, babel config - 2h
+- reading docs: remembering semantic-ui-react, learning new @reduxjs/toolkit, etc. - 1h
+- components & UI - 2h
+- geolocation - 1h
+- search - 1h
+- favourites - 1h
